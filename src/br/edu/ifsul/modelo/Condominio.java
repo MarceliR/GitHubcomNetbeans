@@ -9,14 +9,17 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -72,6 +75,10 @@ public class Condominio implements Serializable{
             @JoinColumn(name = "recurso", referencedColumnName = "id",
                     nullable = false))    
     private List<Condominio> requerem = new ArrayList<>();
+    
+      @OneToMany(mappedBy = "condominio", cascade = CascadeType.ALL,
+            orphanRemoval = true, fetch = FetchType.LAZY)//pessoa nome do atributo
+    private List<UnidadeCondominial> unidadecondominial = new ArrayList<>();
 
     public Condominio() {
     }
@@ -140,5 +147,22 @@ public class Condominio implements Serializable{
         }
         return true;
     }
+
+    public List<Condominio> getRequerem() {
+        return requerem;
+    }
+
+    public void setRequerem(List<Condominio> requerem) {
+        this.requerem = requerem;
+    }
+
+    public List<UnidadeCondominial> getUnidadecondominial() {
+        return unidadecondominial;
+    }
+
+    public void setUnidadecondominial(List<UnidadeCondominial> unidadecondominial) {
+        this.unidadecondominial = unidadecondominial;
+    }
+    
     
 }

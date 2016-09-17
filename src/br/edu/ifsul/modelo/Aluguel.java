@@ -6,10 +6,14 @@
 package br.edu.ifsul.modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,6 +21,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -73,10 +78,21 @@ public class Aluguel implements Serializable{
     @JoinColumn(name="locatario", referencedColumnName="id",nullable=false)
     private Locatario locatario;
 
+    @OneToMany(mappedBy = "aluguel", cascade = CascadeType.ALL,
+            orphanRemoval = true, fetch = FetchType.LAZY)//pessoa nome do atributo
+    private List<mensalidades> mensalidades = new ArrayList<>();
+    
     public Aluguel() {
     }
     
+    public void adicionarMensalidade(mensalidades obj){
+        obj.setAluguel(this);
+        this.mensalidades.add(obj);     
+    }
     
+    public void removerMensalidade(int index){
+        this.mensalidades.remove(index);
+    } 
     
 
     public Integer getId() {
