@@ -16,7 +16,7 @@ public class Util {
             
         }
         String retorno = e.getMessage();
-        if (retorno.contains("viola restrição de chave estrangeira")){//se retorno contem essa mensagem
+        if (retorno.contains("violates foreign key constraint")){//se retorno contem essa mensagem
             retorno = "Registro não pode ser excluido por possuir referência "
                     + "em outros objetos";
         }

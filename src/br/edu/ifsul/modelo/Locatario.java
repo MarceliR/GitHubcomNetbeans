@@ -23,7 +23,6 @@ import org.hibernate.validator.constraints.NotBlank;
  * @author Marcely
  */
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)//
 @Table
 public class Locatario extends Pessoa implements Serializable{
     @Min(value=0)
