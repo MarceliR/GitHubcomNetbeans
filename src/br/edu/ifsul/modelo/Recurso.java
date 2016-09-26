@@ -14,6 +14,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -29,6 +31,7 @@ import org.hibernate.validator.constraints.NotBlank;
  */
 @Entity
 @Table(name="recurso")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Recurso implements Serializable{
     @Id
     @SequenceGenerator(name="seq_recurso", sequenceName = "seq_recurso_id",
@@ -97,6 +100,14 @@ public class Recurso implements Serializable{
             return false;
         }
         return true;
+    }
+
+    public List<Condominio> getRequerem() {
+        return requerem;
+    }
+
+    public void setRequerem(List<Condominio> requerem) {
+        this.requerem = requerem;
     }
     
 }
