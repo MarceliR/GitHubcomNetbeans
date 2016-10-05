@@ -74,7 +74,7 @@ public class Condominio implements Serializable{
             inverseJoinColumns = 
             @JoinColumn(name = "recurso", referencedColumnName = "id",
                     nullable = false))    
-    private List<Condominio> requerem = new ArrayList<>();
+    private List<Recurso> requerem = new ArrayList<>();//arrumar p recursos
     
       @OneToMany(mappedBy = "condominio", cascade = CascadeType.ALL,
             orphanRemoval = true, fetch = FetchType.LAZY)//pessoa nome do atributo
@@ -148,11 +148,11 @@ public class Condominio implements Serializable{
         return true;
     }
 
-    public List<Condominio> getRequerem() {
+    public List<Recurso> getRequerem() {
         return requerem;
     }
 
-    public void setRequerem(List<Condominio> requerem) {
+    public void setRequerem(List<Recurso> requerem) {
         this.requerem = requerem;
     }
 
