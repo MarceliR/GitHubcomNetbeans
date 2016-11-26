@@ -82,6 +82,15 @@ public class Condominio implements Serializable{
 
     public Condominio() {
     }
+    
+     public void adicionarUnidadeCondominial(UnidadeCondominial obj) {
+        obj.setCondominio(this);
+       
+    }
+
+    public void removerItem(int index) {
+             
+        this.unidadecondominial.remove(index);  } 
 
     public Integer getId() {
         return id;
@@ -121,6 +130,14 @@ public class Condominio implements Serializable{
 
     public void setCep(String cep) {
         this.cep = cep;
+    }
+    
+     public List<UnidadeCondominial> getUnidadeCondominial(){
+        return unidadecondominial ;
+    }
+
+    public void setUnidadeCondominial (List<UnidadeCondominial> unidadeCondominial) {
+        this.unidadecondominial = unidadeCondominial;
     }
 
     @Override
